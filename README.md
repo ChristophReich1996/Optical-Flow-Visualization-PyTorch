@@ -50,7 +50,7 @@ Flow maps taken from the [MPI Sintel Flow Dataset](http://sintel.is.tue.mpg.de/)
 [1] @inproceedings{Baker2007,
         title={{A Database and Evaluation Methodology for Optical Flow}},
         author={Baker, Simon and Roth, Stefan and Scharstein, Daniel and Black, Michael J and Lewis, JP and Szeliski, Richard},
-        booktitle={{International Conference on Computer Vision}},
+        booktitle={{International Conference on Computer Vision (ICCV)}},
         pages={1--8},
         year={2007},
         organization={IEEE}
