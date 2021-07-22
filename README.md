@@ -19,7 +19,7 @@ import flow_vis_torch
 flow_rgb = flow_vis_torch.flow_to_color(flow)
 ```
 
-A detailed examples is provided in the [example script](example.py).
+For a detailed example have a look at the [example script](example.py).
 
 ## Visualizations
 
