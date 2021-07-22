@@ -1,7 +1,5 @@
 # Flow files
 *.flo
-# Images
-*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
