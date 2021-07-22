@@ -4,7 +4,7 @@ This repository is a PyTorch fork of the [OpticalFlow_Visualization](https://git
 
 ## Installation
 
-Simply run:
+Simply run the following command to install `flow_vis_torch`.
 
 ```shell script
 pip install git+https://github.com/ChristophReich1996/Optical-Flow-Visualization-PyTorch
