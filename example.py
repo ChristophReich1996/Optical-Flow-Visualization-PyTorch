@@ -23,10 +23,13 @@ def load_flo_file(file_path: str) -> torch.Tensor:
 
 if __name__ == '__main__':
     for file in ["frame_0014.flo", "frame_0005.flo", "frame_0023.flo"]:
+        # Load flow maps
         flow = load_flo_file(file_path=file)
+        # Standard package
         flow_rgb_flow_vis = torch.from_numpy(
             flow_vis.flow_to_color(flow.clone().permute(1, 2, 0).numpy()).astype(float)).permute(2, 0, 1)
         torchvision.utils.save_image(flow_rgb_flow_vis.float(), file.replace(".flo", "_flow_vis.png"), normalize=True)
+        # PyTorch version
         flow_rgb_flow_vis_torch = flow_vis_torch.flow_to_color(flow)
         torchvision.utils.save_image(flow_rgb_flow_vis.float(), file.replace(".flo", "_flow_vis_torch.png"),
                                      normalize=True)
