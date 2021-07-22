@@ -12,7 +12,7 @@ pip install git+https://github.com/ChristophReich1996/Optical-Flow-Visualization
 
 ## Usage
 
-Convert a given flow of the shape (batch size (optional), 2, height, width) to an RGB image of the shape (batch size (optional), 3, height, width) by calling `flow_vis_torch.flow_to_color`.
+Convert a given flow of the shape `(batch size (optional), 2, height, width)` to an RGB image of the shape `(batch size (optional), 3, height, width)` by calling `flow_vis_torch.flow_to_color`.
 
 ```python
 import flow_vis_torch
