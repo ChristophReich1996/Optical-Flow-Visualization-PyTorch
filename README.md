@@ -60,7 +60,7 @@ Flow maps taken from the [MPI Sintel Flow Dataset](http://sintel.is.tue.mpg.de/)
 ```bibtex
 [2] @inproceedings{Butler2012,
         title={{A Naturalistic Open Source Movie for Optical Flow Evaluation}},
-        author={Butler, D. J. and Wulff, J. and Stanley, G. B. and Black, M. J.},
+        author={Butler, Daniel J and Wulff, Jonas and Stanley, Garrett B and Black, Michael J},
         booktitle={{European Conference on Computer Vision (ECCV)}},
         pages = {611--625},
         year = {2012},
