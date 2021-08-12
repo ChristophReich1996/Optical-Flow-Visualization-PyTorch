@@ -137,7 +137,6 @@ def flow_to_color(flow: torch.Tensor, clip_flow: Optional[Union[float, torch.Ten
     # Init flow image
     flow_image = torch.zeros(batch_size, 3, height, width, device=device)
     # Iterate over batch dimension
-    print(flow_vertical.shape)
     for index in range(batch_size):
         flow_image[index] = _flow_hw_to_color(flow_vertical=flow_vertical[index],
                                               flow_horizontal=flow_horizontal[index], color_wheel=color_wheel,
