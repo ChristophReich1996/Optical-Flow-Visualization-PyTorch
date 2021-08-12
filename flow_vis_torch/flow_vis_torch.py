@@ -4,9 +4,10 @@ import torch
 from math import pi as PI
 
 
-def get_color_wheel() -> torch.Tensor:
+def get_color_wheel(device: torch.device) -> torch.Tensor:
     """
     Generates the color wheel.
+    :param device: (torch.device) Device to be used
     :return: (torch.Tensor) Color wheel tensor of the shape [55, 3]
     """
     # Set constants
@@ -43,22 +44,25 @@ def get_color_wheel() -> torch.Tensor:
     # MR
     color_wheel[counter:counter + MR, 2] = 255 - torch.floor(255 * torch.arange(MR) / MR)
     color_wheel[counter:counter + MR, 0] = 255
+    # To device
+    color: wheel:torch.Tensor = color.to(device)
     return color_wheel
 
 
 def _flow_hw_to_color(flow_vertical: torch.Tensor, flow_horizontal: torch.Tensor,
-                      color_wheel: torch.Tensor) -> torch.Tensor:
+                      color_wheel: torch.Tensor, device: torch.device) -> torch.Tensor:
     """
     Private function applies the flow color wheel to flow components (vertical and horizontal).
     :param flow_vertical: (torch.Tensor) Vertical flow of the shape [height, width]
     :param flow_horizontal: (torch.Tensor) Horizontal flow of the shape [height, width]
     :param color_wheel: (torch.Tensor) Color wheel tensor of the shape [55, 3]
+    :param: device: (torch.device) Device to be used
     :return: (torch.Tensor) Visualized flow of the shape [3, height, width]
     """
     # Get shapes
     _, height, width = flow_vertical.shape
     # Init flow image
-    flow_image: torch.Tensor = torch.zeros(3, height, width, dtype=torch.float32)
+    flow_image: torch.Tensor = torch.zeros(3, height, width, dtype=torch.float32, device=device)
     # Get number of colors
     number_of_colors: int = color_wheel.shape[0]
     # Compute norm, angle and factors
@@ -114,6 +118,8 @@ def flow_to_color(flow: torch.Tensor, clip_flow: Optional[Union[float, torch.Ten
     batch_size, _, height, width = flow.shape
     # Check flow dimension
     assert flow.shape[1] == 2, "Flow dimension must have the shape 2 but tensor with {} given".format(flow.shape[1])
+    # Save device
+    device: torch.device = flow.device
     # Clip flow if utilized
     if clip_flow is not None:
         flow = flow.clip(max=clip_flow)
@@ -127,9 +133,9 @@ def flow_to_color(flow: torch.Tensor, clip_flow: Optional[Union[float, torch.Ten
     flow_vertical: torch.Tensor = flow_vertical / (flow_max_norm + 1e-05)
     flow_horizontal: torch.Tensor = flow_horizontal / (flow_max_norm + 1e-05)
     # Get color wheel
-    color_wheel: torch.Tensor = get_color_wheel()
+    color_wheel: torch.Tensor = get_color_wheel(device=device)
     # Init flow image
-    flow_image = torch.zeros(batch_size, 3, height, width)
+    flow_image = torch.zeros(batch_size, 3, height, width, device=device)
     # Iterate over batch dimension
     for index in range(batch_size):
         flow_image[index] = _flow_hw_to_color(flow_vertical=flow_vertical[index],
