@@ -45,7 +45,7 @@ def get_color_wheel(device: torch.device) -> torch.Tensor:
     color_wheel[counter:counter + MR, 2] = 255 - torch.floor(255 * torch.arange(MR) / MR)
     color_wheel[counter:counter + MR, 0] = 255
     # To device
-    color: wheel:torch.Tensor = color.to(device)
+    color_wheel:torch.Tensor = color_wheel.to(device)
     return color_wheel
 
 
@@ -78,12 +78,12 @@ def _flow_hw_to_color(flow_vertical: torch.Tensor, flow_horizontal: torch.Tensor
         # Get component of all colors
         tmp: torch.Tensor = color_wheel[:, index]
         # Get colors
-        color_0 = tmp[k0] / 255.
-        color_1 = tmp[k1] / 255.
+        color_0: torch.Tensor = tmp[k0] / 255.
+        color_1: torch.Tensor = tmp[k1] / 255.
         # Compute color
-        color = (1. - f) * color_0 + f * color_1
+        color: torch.Tensor = (1. - f) * color_0 + f * color_1
         # Get color index
-        color_index = flow_norm <= 1
+        color_index: torch.Tensor = flow_norm <= 1
         # Set color saturation
         color[color_index] = 1 - flow_norm[color_index] * (1. - color[color_index])
         color[~color_index] = color[~color_index] * 0.75
