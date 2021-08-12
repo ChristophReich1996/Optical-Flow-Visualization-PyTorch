@@ -124,8 +124,8 @@ def flow_to_color(flow: torch.Tensor, clip_flow: Optional[Union[float, torch.Ten
     if clip_flow is not None:
         flow = flow.clip(max=clip_flow)
     # Get horizontal and vertical flow
-    flow_vertical: torch.Tensor = flow[:, 0]
-    flow_horizontal: torch.Tensor = flow[:, 1]
+    flow_vertical: torch.Tensor = flow[:, 0:1]
+    flow_horizontal: torch.Tensor = flow[:, 1:2]
     # Get max norm of flow
     flow_max_norm: torch.Tensor = (flow_vertical ** 2 + flow_horizontal ** 2).sqrt().view(batch_size, -1).max(dim=-1)[0]
     flow_max_norm: torch.Tensor = flow_max_norm.view(batch_size, 1, 1, 1)
