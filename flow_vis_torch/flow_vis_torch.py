@@ -45,7 +45,7 @@ def get_color_wheel(device: torch.device) -> torch.Tensor:
     color_wheel[counter:counter + MR, 2] = 255 - torch.floor(255 * torch.arange(MR) / MR)
     color_wheel[counter:counter + MR, 0] = 255
     # To device
-    color_wheel:torch.Tensor = color_wheel.to(device)
+    color_wheel: torch.Tensor = color_wheel.to(device)
     return color_wheel
 
 
@@ -139,5 +139,6 @@ def flow_to_color(flow: torch.Tensor, clip_flow: Optional[Union[float, torch.Ten
     # Iterate over batch dimension
     for index in range(batch_size):
         flow_image[index] = _flow_hw_to_color(flow_vertical=flow_vertical[index],
-                                              flow_horizontal=flow_horizontal[index], color_wheel=color_wheel)
+                                              flow_horizontal=flow_horizontal[index], color_wheel=color_wheel,
+                                              device=device)
     return flow_image if batch_dimension else flow_image[0]
