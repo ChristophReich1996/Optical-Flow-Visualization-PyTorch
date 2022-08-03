@@ -132,7 +132,7 @@ def flow_to_color(flow: torch.Tensor, clip_flow: Optional[Union[float, torch.Ten
     flow_max_norm: torch.Tensor = (flow_vertical ** 2 + flow_horizontal ** 2).sqrt().view(batch_size, -1).max(dim=-1)[0]
     flow_max_norm: torch.Tensor = flow_max_norm.view(batch_size, 1, 1, 1)
     if normalize_over_video:
-        flow_max_norm: Tensor = flow_max_norm.max(dim=0, keepdim=True)
+        flow_max_norm: Tensor = flow_max_norm.max(dim=0, keepdim=True)[0]
     # Normalize flow
     flow_vertical: torch.Tensor = flow_vertical / (flow_max_norm + 1e-05)
     flow_horizontal: torch.Tensor = flow_horizontal / (flow_max_norm + 1e-05)
